@@ -15,16 +15,16 @@ class DiscountCalculator
 		discount_prices = Hash.new
 		actual_prices = Hash.new
 
-	  puts "Please enter all the items purchased separated by a comma"
-	  item_names = gets.chomp
-	  return if item_names.empty?
-
-	  cart_items = item_names.split(',').map(&:strip).map(&:downcase)
-
-	  cart_items.uniq.each do |item|
-	  	discount_prices[item] = discount_price(item.to_sym, cart_items.count(item))
-	  	actual_prices[item] = actual_price(item.to_sym, cart_items.count(item))
-	  end
+		puts "Please enter all the items purchased separated by a comma"
+		item_names = gets.chomp
+		return if item_names.empty?
+		
+		cart_items = item_names.split(',').map(&:strip).map(&:downcase)
+		
+		cart_items.uniq.each do |item|
+		discount_prices[item] = discount_price(item.to_sym, cart_items.count(item))
+		actual_prices[item] = actual_price(item.to_sym, cart_items.count(item))
+		end
 
 		puts "Total price : $#{discount_prices.values.sum}"
 		puts "You saved $#{sprintf("%.2f", actual_prices.values.sum - discount_prices.values.sum)} today."
