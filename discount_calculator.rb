@@ -38,7 +38,7 @@ class DiscountCalculator
 			sale_price = (quantity / sale_quantity) * @sale_items[item][:amount]
 			remaining_price = (quantity % sale_quantity) * @items[item]
 			total_price = remaining_price + sale_price
-		else
+		elsif @items.keys.include?(item)
 			total_price = @items[item] * quantity
 		end
 
