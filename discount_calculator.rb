@@ -26,6 +26,13 @@ class DiscountCalculator
 		actual_prices[item] = actual_price(item.to_sym, cart_items.count(item))
 		end
 
+		puts ''
+		puts 'Item     Quantity      Price'
+		puts '----------------------------'
+		discount_prices.keys.each do |item|
+			puts "#{item}      #{cart_items.count(item)}            $#{discount_prices[item]}"
+		end
+		puts ''
 		puts "Total price : $#{discount_prices.values.sum}"
 		puts "You saved $#{sprintf("%.2f", actual_prices.values.sum - discount_prices.values.sum)} today."
 	end
