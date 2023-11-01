@@ -58,4 +58,3 @@ end
 
 discount_calculator = DiscountCalculator.new
 calculate = discount_calculator.discount_calculator
-
