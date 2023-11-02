@@ -7,9 +7,15 @@ class DiscountCalculator
       apple: 0.89
     }
 
-    @sale_items = { 
-      milk: { quantity: 2, amount: 5.00 },
-      bread: { quantity: 3, amount: 6.00 }
+    @sale_items = {
+      milk: {
+      	quantity: 2,
+      	amount: 5.00 
+      },
+      bread: {
+      	quantity: 3,
+      	amount: 6.00 
+      }
     }
   end
 
@@ -49,7 +55,7 @@ class DiscountCalculator
   end
 
   def calculate_item_price(item, quantity)
-    @items.key?(item) ? @items[item] * quantity : 0
+    @items.key?(item) ? ( @items[item] * quantity ) : 0
   end
 
   def display_cart_summary(discount_prices, cart_items)
