@@ -30,8 +30,8 @@ class DiscountCalculator
     cart_items = item_names.split(',').map(&:strip).map(&:downcase)
 
     cart_items.uniq.each do |item|
-      discount_prices[item] = calculate_item_discount(item, cart_items.count(item))
-      actual_prices[item] = calculate_item_price(item, cart_items.count(item))
+      discount_prices[item] = item_sale_price(item.to_sym, cart_items.count(item))
+      actual_prices[item] = item_actual_price(item.to_sym, cart_items.count(item))
     end
 
     display_cart_summary(discount_prices, cart_items)
@@ -41,21 +41,19 @@ class DiscountCalculator
 
   private
 
-  def calculate_item_discount(item, quantity)
+  def item_sale_price(item, quantity)
     if @sale_items.key?(item)
       sale_quantity = @sale_items[item][:quantity]
       sale_price = (quantity / sale_quantity) * @sale_items[item][:amount]
       remaining_price = (quantity % sale_quantity) * @items[item]
       remaining_price + sale_price
-    elsif @items.key?(item)
-      @items[item] * quantity
     else
-      0
+      (@items[item] || 0) * quantity
     end
   end
 
-  def calculate_item_price(item, quantity)
-    @items.key?(item) ? ( @items[item] * quantity ) : 0
+  def item_actual_price(item, quantity)
+    (@items[item] || 0) * quantity
   end
 
   def display_cart_summary(discount_prices, cart_items)
